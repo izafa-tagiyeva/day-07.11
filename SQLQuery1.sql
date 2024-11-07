@@ -1,0 +1,35 @@
+CREATE DATABASE userRole
+USE userRole
+
+
+CREATE TABLE Roles (
+    id INT PRIMARY KEY IDENTITY(1,1) ,
+    [name] NVARCHAR(50)
+);
+
+CREATE TABLE Users (
+    id INT PRIMARY KEY IDENTITY(100,1),
+    username NVARCHAR(50),
+    [password] NVARCHAR(50),
+    roleId INT,
+    FOREIGN KEY (roleId) REFERENCES Roles(id)
+);
+
+SELECT * FROM ROLES
+SELECT * FROM USERS
+
+INSERT INTO Roles
+VALUES(1,'MODERATOR')
+INSERT INTO Roles
+VALUES(2,'ADMIN')
+
+INSERT INTO Users
+VALUES(101,'MATHEO','MATHEO123',1)
+INSERT INTO Users
+VALUES(102,'STEVEN','STEVEN123',2)
+
+
+
+SELECT Users.username, Roles.[name] FROM Users
+INNER JOIN Roles 
+ON Users.roleId = Roles.id;
